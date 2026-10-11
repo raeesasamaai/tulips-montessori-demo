@@ -58,6 +58,7 @@ export function Hero() {
 
 export function AboutApproach() {
   const icons = [Sprout, Leaf, Heart];
+  const img = environment[0]!;
   return (
     <section id="about" className="section-pad bg-card">
       <div className="container-site grid gap-12 lg:grid-cols-2 lg:gap-20">
@@ -65,7 +66,7 @@ export function AboutApproach() {
           <SectionHead eyebrow="About the school" title="Small beginnings. Meaningful growth." intro="Tulips Montessori is a half-day preschool for young children, rooted in the Montessori method and an Islamic ethos. We care for the whole child — their independence, character, curiosity and sense of belonging." />
           <p className="mt-4 text-muted-foreground">In a Montessori classroom, children learn by doing. Instead of everyone working on the same thing at once, each child chooses from carefully designed materials, and the teacher observes and guides. It is calm, purposeful and built around how young children naturally learn.</p>
           <ul className="mt-10 space-y-6">
-            {themes.map((t, i) => { const I = icons[i]; return (
+            {themes.map((t, i) => { const I = icons[i]!; return (
               <li key={t.title} className="flex gap-4">
                 <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-beige text-primary"><I size={20} aria-hidden /></span>
                 <div><h3 className="text-2xl">{t.title}</h3><p className="mt-1 text-muted-foreground">{t.body}</p></div>
@@ -73,7 +74,7 @@ export function AboutApproach() {
           </ul>
         </div>
         <figure className="self-center">
-          <img src={environment[0].src} width={environment[0].w} height={environment[0].h} alt={environment[0].alt} loading="lazy" className="aspect-[4/5] w-full rounded-[2rem] object-cover" />
+          <img src={img.src} width={img.w} height={img.h} alt={img.alt} loading="lazy" className="aspect-[4/5] w-full rounded-[2rem] object-cover" />
           <figcaption className="mt-2 text-xs text-muted-foreground">Illustrative image</figcaption>
         </figure>
       </div>
