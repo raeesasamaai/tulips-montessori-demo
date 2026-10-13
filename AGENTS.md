@@ -8,5 +8,3 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
-
-- Keep site-wide entrance motion in the shared useScrollEntrance hook, using IntersectionObserver and the Web Animations API; this preserves SSR-visible content, avoids nested animations, and respects reduced-motion preferences without extra dependencies.

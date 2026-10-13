@@ -2,7 +2,6 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Header } from "@/components/site/Header";
 import { Hero, AboutApproach, LearningEnvironment, Educators, ParentReviews, Admissions, FAQ } from "@/components/site/Sections";
 import { ContactSection, Footer } from "@/components/site/ContactFooter";
-import { useScrollEntrance } from "@/hooks/use-scroll-entrance";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -20,7 +19,6 @@ export const Route = createFileRoute("/")({
 });
 
 function Index() {
-  useScrollEntrance();
   return (
     <>
       <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-full focus:bg-primary focus:px-5 focus:py-3 focus:text-primary-foreground">Skip to content</a>
