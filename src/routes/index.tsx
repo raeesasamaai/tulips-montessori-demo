@@ -1,28 +1,71 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Header } from "@/components/site/Header";
-import { Hero, AboutApproach, LearningEnvironment, Educators, ParentReviews, Admissions, FAQ } from "@/components/site/Sections";
-import { ContactSection, Footer } from "@/components/site/ContactFooter";
-<<<<<<< HEAD
+import {
+  Hero,
+  AboutApproach,
+  LearningEnvironment,
+  Educators,
+  ParentReviews,
+  Admissions,
+  FAQ,
+} from "@/components/site/Sections";
+import {
+  ContactSection,
+  Footer,
+} from "@/components/site/ContactFooter";
 import { Prospectus } from "@/components/site/Prospectus";
 import { ScrollAnimations } from "@/components/site/ScrollAnimations";
-=======
 import { useReveal } from "@/hooks/use-reveal";
->>>>>>> f2f9892a2f9471525cbefaa354a8eff2a7254f16
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Tulips Montessori — Montessori preschool in Surrey Estate, Cape Town (design concept)" },
-      { name: "description", content: "Draft website concept for Tulips Montessori, a half-day Montessori preschool with an Islamic ethos for ages 3–6 in Surrey Estate, Cape Town." },
-      { name: "robots", content: "noindex, nofollow" },
-      { property: "og:title", content: "Tulips Montessori — Preparing for Life" },
-      { property: "og:description", content: "A nurturing Montessori preschool for ages 3–6 in Surrey Estate, Cape Town. Design concept." },
-      { property: "og:type", content: "website" },
-      { property: "og:image", content: "/TulipsLogo.png" },
-      { property: "og:image:alt", content: "Tulips Montessori — Preparing for Life" },
-      { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:image", content: "/TulipsLogo.png" },
-      { name: "twitter:image:alt", content: "Tulips Montessori — Preparing for Life" },
+      {
+        title:
+          "Tulips Montessori — Montessori preschool in Surrey Estate, Cape Town (design concept)",
+      },
+      {
+        name: "description",
+        content:
+          "Draft website concept for Tulips Montessori, a half-day Montessori preschool with an Islamic ethos for ages 3–6 in Surrey Estate, Cape Town.",
+      },
+      {
+        name: "robots",
+        content: "noindex, nofollow",
+      },
+      {
+        property: "og:title",
+        content: "Tulips Montessori — Preparing for Life",
+      },
+      {
+        property: "og:description",
+        content:
+          "A nurturing Montessori preschool for ages 3–6 in Surrey Estate, Cape Town. Design concept.",
+      },
+      {
+        property: "og:type",
+        content: "website",
+      },
+      {
+        property: "og:image",
+        content: "/TulipsLogo.png",
+      },
+      {
+        property: "og:image:alt",
+        content: "Tulips Montessori — Preparing for Life",
+      },
+      {
+        name: "twitter:card",
+        content: "summary_large_image",
+      },
+      {
+        name: "twitter:image",
+        content: "/TulipsLogo.png",
+      },
+      {
+        name: "twitter:image:alt",
+        content: "Tulips Montessori — Preparing for Life",
+      },
     ],
   }),
   component: Index,
@@ -30,11 +73,20 @@ export const Route = createFileRoute("/")({
 
 function Index() {
   useReveal();
+
   return (
     <>
       <ScrollAnimations />
-      <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-full focus:bg-primary focus:px-5 focus:py-3 focus:text-primary-foreground">Skip to content</a>
+
+      <a
+        href="#main"
+        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-full focus:bg-primary focus:px-5 focus:py-3 focus:text-primary-foreground"
+      >
+        Skip to content
+      </a>
+
       <Header />
+
       <main id="main">
         <Hero />
         <AboutApproach />
@@ -46,6 +98,7 @@ function Index() {
         <FAQ />
         <ContactSection />
       </main>
+
       <Footer />
     </>
   );
