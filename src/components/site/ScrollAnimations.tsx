@@ -7,7 +7,13 @@ export function ScrollAnimations() {
 
     const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
     const elements = new Set<HTMLElement>();
-    const reveal = (element: HTMLElement) => {
+    const reveal = (element: HTMLElement, allowAnimation = true) => {
+      if (element.dataset["revealState"] === "visible") return;
+      // Never fade out text the visitor is already reading or has scrolled past.
+      const nearViewportEdge = element.getBoundingClientRect().top >= window.innerHeight;
+      if (allowAnimation && !motion.matches && nearViewportEdge) {
+        element.dataset["revealAnimate"] = "true";
+      }
       element.dataset["revealState"] = "visible";
       observer.unobserve(element);
     };
@@ -17,7 +23,7 @@ export function ScrollAnimations() {
           if (entry.isIntersecting) reveal(entry.target as HTMLElement);
         }
       },
-      { threshold: 0, rootMargin: "0px 0px -24px 0px" },
+      { threshold: 0, rootMargin: "0px 0px 80px 0px" },
     );
 
     const register = (element: HTMLElement) => {
@@ -26,13 +32,18 @@ export function ScrollAnimations() {
       if (elements.has(element)) return;
       elements.add(element);
       if (motion.matches) {
-        reveal(element);
+        reveal(element, false);
+        return;
+      }
+      const bounds = element.getBoundingClientRect();
+      if (bounds.top < window.innerHeight && bounds.bottom > 0) {
+        reveal(element, false);
         return;
       }
       const siblings = Array.from(element.parentElement?.children ?? []).filter((sibling) =>
         sibling.hasAttribute("data-reveal"),
       );
-      const delay = Math.min(Math.max(siblings.indexOf(element), 0), 3) * 70;
+      const delay = Math.min(Math.max(siblings.indexOf(element), 0), 2) * 40;
       element.style.setProperty("--reveal-delay", `${delay}ms`);
       element.dataset["revealState"] = "pending";
       observer.observe(element);
@@ -53,7 +64,12 @@ export function ScrollAnimations() {
     mutations.observe(document.body, { childList: true, subtree: true });
 
     const onMotionChange = () => {
-      if (motion.matches) elements.forEach(reveal);
+      if (motion.matches) {
+        elements.forEach((element) => {
+          delete element.dataset["revealAnimate"];
+          reveal(element, false);
+        });
+      }
     };
     motion.addEventListener("change", onMotionChange);
 
@@ -63,6 +79,7 @@ export function ScrollAnimations() {
       motion.removeEventListener("change", onMotionChange);
       elements.forEach((element) => {
         delete element.dataset["revealState"];
+        delete element.dataset["revealAnimate"];
         element.style.removeProperty("--reveal-delay");
       });
     };

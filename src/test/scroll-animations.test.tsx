@@ -44,7 +44,7 @@ describe("Scroll animations", () => {
     const second = screen.getByText("Second");
     expect(first).toHaveAttribute("data-reveal-state", "pending");
     expect(second).toHaveAttribute("data-reveal-state", "pending");
-    expect(second.style.getPropertyValue("--reveal-delay")).toBe("70ms");
+    expect(second.style.getPropertyValue("--reveal-delay")).toBe("40ms");
 
     act(() =>
       notify(
@@ -129,5 +129,64 @@ describe("Scroll animations", () => {
     expect(observe).toHaveBeenCalledWith(text.parentElement);
     expect(observe).not.toHaveBeenCalledWith(text);
     expect(text).not.toHaveAttribute("data-reveal-state");
+  });
+
+  it("starts an entrance once before the element reaches the screen", () => {
+    vi.spyOn(HTMLElement.prototype, "getBoundingClientRect").mockReturnValue({
+      top: window.innerHeight + 40,
+      bottom: window.innerHeight + 140,
+    } as DOMRect);
+    render(
+      <>
+        <ScrollAnimations />
+        <p data-reveal>Incoming content</p>
+      </>,
+    );
+    const element = screen.getByText("Incoming content");
+    const entries = [{ target: element, isIntersecting: true } as IntersectionObserverEntry];
+    act(() => notify(entries, {} as IntersectionObserver));
+    expect(element).toHaveAttribute("data-reveal-animate", "true");
+    act(() => notify(entries, {} as IntersectionObserver));
+    expect(unobserve).toHaveBeenCalledTimes(1);
+  });
+
+  it("does not fade out content already visible when the page loads", () => {
+    vi.spyOn(HTMLElement.prototype, "getBoundingClientRect").mockReturnValue({
+      top: 100,
+      bottom: 200,
+    } as DOMRect);
+    render(
+      <>
+        <ScrollAnimations />
+        <p data-reveal>Already visible</p>
+      </>,
+    );
+    const element = screen.getByText("Already visible");
+    expect(element).toHaveAttribute("data-reveal-state", "visible");
+    expect(element).not.toHaveAttribute("data-reveal-animate");
+    expect(observe).not.toHaveBeenCalled();
+  });
+
+  it("skips the fade if fast scrolling has already brought content into view", () => {
+    const bounds = vi.spyOn(HTMLElement.prototype, "getBoundingClientRect").mockReturnValue({
+      top: window.innerHeight + 100,
+      bottom: window.innerHeight + 200,
+    } as DOMRect);
+    render(
+      <>
+        <ScrollAnimations />
+        <p data-reveal>Fast scroll</p>
+      </>,
+    );
+    const element = screen.getByText("Fast scroll");
+    bounds.mockReturnValue({ top: 100, bottom: 200 } as DOMRect);
+    act(() =>
+      notify(
+        [{ target: element, isIntersecting: true } as IntersectionObserverEntry],
+        {} as IntersectionObserver,
+      ),
+    );
+    expect(element).toHaveAttribute("data-reveal-state", "visible");
+    expect(element).not.toHaveAttribute("data-reveal-animate");
   });
 });
