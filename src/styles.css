@@ -119,6 +119,7 @@
   &[aria-invalid="true"] { border-color: var(--destructive); }
 }
 
+<<<<<<< HEAD
 /* Only JavaScript-enhanced elements are hidden before entering the viewport. */
 @media (prefers-reduced-motion: no-preference) {
   [data-reveal-state="pending"] {
@@ -150,3 +151,8 @@
     animation: none !important;
   }
 }
+=======
+/* Entrance animation: elements rise gently from below when scrolled into view */
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity .8s cubic-bezier(.22,.61,.36,1), transform .8s cubic-bezier(.22,.61,.36,1); transition-delay: var(--reveal-delay, 0ms); }
+.reveal.reveal-in { opacity: 1; transform: none; }
+>>>>>>> f2f9892a2f9471525cbefaa354a8eff2a7254f16

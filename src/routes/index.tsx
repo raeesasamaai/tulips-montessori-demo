@@ -2,8 +2,12 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Header } from "@/components/site/Header";
 import { Hero, AboutApproach, LearningEnvironment, Educators, ParentReviews, Admissions, FAQ } from "@/components/site/Sections";
 import { ContactSection, Footer } from "@/components/site/ContactFooter";
+<<<<<<< HEAD
 import { Prospectus } from "@/components/site/Prospectus";
 import { ScrollAnimations } from "@/components/site/ScrollAnimations";
+=======
+import { useReveal } from "@/hooks/use-reveal";
+>>>>>>> f2f9892a2f9471525cbefaa354a8eff2a7254f16
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -25,6 +29,7 @@ export const Route = createFileRoute("/")({
 });
 
 function Index() {
+  useReveal();
   return (
     <>
       <ScrollAnimations />
