@@ -104,4 +104,30 @@ describe("Scroll animations", () => {
     expect(observe).toHaveBeenCalledWith(menu);
     expect(menu).toHaveAttribute("data-reveal-state", "pending");
   });
+
+  it("leaves content untouched when scroll observation is unavailable", () => {
+    Reflect.deleteProperty(window, "IntersectionObserver");
+    render(
+      <>
+        <ScrollAnimations />
+        <p data-reveal>Visible without animation</p>
+      </>,
+    );
+    expect(screen.getByText("Visible without animation")).not.toHaveAttribute("data-reveal-state");
+  });
+
+  it("animates a grouped block once even if its children have reveal markers", () => {
+    render(
+      <>
+        <ScrollAnimations />
+        <div data-reveal="group">
+          <p data-reveal>Grouped text</p>
+        </div>
+      </>,
+    );
+    const text = screen.getByText("Grouped text");
+    expect(observe).toHaveBeenCalledWith(text.parentElement);
+    expect(observe).not.toHaveBeenCalledWith(text);
+    expect(text).not.toHaveAttribute("data-reveal-state");
+  });
 });

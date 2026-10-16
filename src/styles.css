@@ -212,34 +212,11 @@
   }
 }
 
-/* ScrollAnimations: data-attribute-based reveal system. */
+/* Content remains visible until an entrance animation actually starts. */
 @media (prefers-reduced-motion: no-preference) {
-  [data-reveal-state="pending"] {
-    opacity: 0;
-    translate: 0 28px;
-  }
-
   [data-reveal-state="visible"] {
     animation: reveal-up 700ms cubic-bezier(0.22, 1, 0.36, 1) both;
     animation-delay: var(--reveal-delay, 0ms);
-  }
-
-  /*
-   * useReveal: class-based reveal system.
-   * Exclude elements already controlled by the data-attribute system.
-   */
-  .reveal:not([data-reveal-state]) {
-    opacity: 0;
-    transform: translateY(28px);
-    transition:
-      opacity 0.8s cubic-bezier(0.22, 0.61, 0.36, 1),
-      transform 0.8s cubic-bezier(0.22, 0.61, 0.36, 1);
-    transition-delay: var(--reveal-delay, 0ms);
-  }
-
-  .reveal.reveal-in:not([data-reveal-state]) {
-    opacity: 1;
-    transform: none;
   }
 
   [data-reveal]:focus-within,

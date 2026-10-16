@@ -21,6 +21,8 @@ export function ScrollAnimations() {
     );
 
     const register = (element: HTMLElement) => {
+      // A grouped block owns its entrance animation, including all its children.
+      if (element.parentElement?.closest('[data-reveal="group"]')) return;
       if (elements.has(element)) return;
       elements.add(element);
       if (motion.matches) {

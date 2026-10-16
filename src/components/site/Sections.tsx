@@ -44,7 +44,7 @@ export function Hero() {
         </figure>
       </div>
       <div className="container-site pb-14">
-        <ul data-reveal className="grid gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-3">
+        <ul data-reveal="group" className="grid gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-3">
           {facts.map(({ icon: I, label }) => (
             <li key={label} className="flex items-center gap-3 bg-card px-6 py-5"><I size={20} className="text-primary" aria-hidden /><span className="font-medium">{label}</span></li>
           ))}

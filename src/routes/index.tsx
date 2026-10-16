@@ -15,7 +15,6 @@ import {
 } from "@/components/site/ContactFooter";
 import { Prospectus } from "@/components/site/Prospectus";
 import { ScrollAnimations } from "@/components/site/ScrollAnimations";
-import { useReveal } from "@/hooks/use-reveal";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -72,8 +71,6 @@ export const Route = createFileRoute("/")({
 });
 
 function Index() {
-  useReveal();
-
   return (
     <>
       <ScrollAnimations />
