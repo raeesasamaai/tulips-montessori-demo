@@ -28,7 +28,7 @@ export function EnquiryForm() {
 
   if (state === "done") {
     return (
-      <div role="status" className="rounded-2xl border border-border bg-card p-8 shadow-soft">
+      <div data-reveal role="status" className="rounded-2xl border border-border bg-card p-8 shadow-soft">
         <CheckCircle2 className="text-success" size={32} aria-hidden />
         <p className="mt-4 text-lg">Demo submission complete. No enquiry has been sent. On the live website, the school would receive your message and you would receive an acknowledgement email.</p>
         <button type="button" className="btn-secondary mt-6" onClick={() => setState("idle")}>Send another</button>
@@ -38,7 +38,7 @@ export function EnquiryForm() {
 
   const errList = Object.entries(errors).filter(([, m]) => m);
   const Field = ({ id, label, req, children }: { id: keyof EnquiryValues; label: string; req?: boolean; children: React.ReactNode }) => (
-    <div>
+    <div data-reveal>
       <label htmlFor={id} className="mb-1.5 block text-sm font-medium">{label} {req ? <span aria-hidden className="text-destructive">*</span> : <span className="font-normal text-muted-foreground">(optional)</span>}</label>
       {children}
       {errors[id] && <p id={`${id}-err`} className="mt-1 text-sm text-destructive">{errors[id]}</p>}
@@ -48,8 +48,8 @@ export function EnquiryForm() {
 
   return (
     <form id="enquire" noValidate onSubmit={onSubmit} className="space-y-5 rounded-2xl border border-border bg-card p-6 shadow-soft md:p-8" aria-labelledby="form-h">
-      <h3 id="form-h" className="text-3xl">Send an enquiry</h3>
-      <p className="text-sm text-muted-foreground">Demo form — nothing you enter is sent or stored.</p>
+      <h3 data-reveal id="form-h" className="text-3xl">Send an enquiry</h3>
+      <p data-reveal className="text-sm text-muted-foreground">Demo form — nothing you enter is sent or stored.</p>
       <div ref={summaryRef} tabIndex={-1} role="alert" className="outline-none">
         {errList.length > 0 && <p className="rounded-lg bg-destructive/10 px-4 py-3 text-sm text-destructive">Please correct {errList.length} {errList.length === 1 ? "field" : "fields"} below.</p>}
         {state === "error" && <p className="rounded-lg bg-destructive/10 px-4 py-3 text-sm text-destructive">Something went wrong. Your details are still here — please try again.</p>}
@@ -71,7 +71,7 @@ export function EnquiryForm() {
       </div>
       {v.type === "visit" && <p className="rounded-lg bg-beige px-4 py-3 text-sm">This is a visit <strong>request</strong>. The school will contact you to suggest a time — it isn't a confirmed booking.</p>}
       {Field({ id: "message", label: "Message", req: true, children: <textarea {...a("message")} rows={4} value={v.message} onChange={set("message")} /> })}
-      <button type="submit" className="btn-primary w-full" disabled={state === "sending"} aria-busy={state === "sending"}>
+      <button data-reveal type="submit" className="btn-primary w-full" disabled={state === "sending"} aria-busy={state === "sending"}>
         {state === "sending" ? "Sending…" : v.type === "visit" ? "Request a visit" : "Send enquiry"}
       </button>
     </form>

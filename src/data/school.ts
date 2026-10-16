@@ -1,26 +1,27 @@
 // Editable school content. Everything marked "placeholder" must be confirmed by the school.
 import heroImg from "@/assets/hero-classroom.jpg";
-import practicalImg from "@/assets/practical-life.jpg";
-import languageImg from "@/assets/language.jpg";
-import numbersImg from "@/assets/numbers.jpg";
+import practicalImg from "@/assets/PracticalLife.jpg";
+import languageImg from "@/assets/LanguageABC.jpg";
+import numbersImg from "@/assets/Numbers123.jpg";
+import tulipsLogo from "@/assets/TulipsLogo.png";
+import kidsImg from "@/assets/Kids-1.jpg";
 
 export const school = {
   name: "Tulips Montessori",
   tagline: "Preparing for Life",
-  location: "Surrey Estate, Cape Town",
+  location: "111 Sirius Road, Surrey Estate Cape Town",
   ages: "Ages 3–6",
   session: "Half-day preschool",
-  /** Set to an image URL / import once the approved logo file is supplied. */
-  logoSrc: null as string | null,
+  logoSrc: tulipsLogo,
   /** Set to a PDF URL once the prospectus is supplied. */
   prospectusUrl: null as string | null,
   /** Set to the verified Google Business Profile URL. */
   googleProfileUrl: null as string | null,
   contact: {
-    phone: null as string | null,
-    email: null as string | null,
-    address: null as string | null,
-    hours: null as string | null,
+    phone: "0677826932",
+    email: "Admin@tulipsmontessori.co.za",
+    address: "111 Sirius Road, Surrey Estate Cape Town",
+    hours: "07:30 – 12:30",
   },
   notice: "Design concept — school information subject to confirmation.",
 };
@@ -29,18 +30,20 @@ export const nav = [
   { label: "About", href: "#about" },
   { label: "Learning", href: "#learning" },
   { label: "Reviews", href: "#reviews" },
+  { label: "Prospectus", href: "#prospectus" },
   { label: "FAQs", href: "#faqs" },
   { label: "Contact", href: "#contact" },
 ];
 
 export const images = {
+  about: { src: kidsImg, w: 1200, h: 1600, alt: "Children playing together in an outdoor sandpit" },
   hero: { src: heroImg, w: 1280, h: 1024, alt: "A calm Montessori classroom with low wooden shelves and child-sized furniture" },
 };
 
 export const environment = [
-  { src: practicalImg, w: 896, h: 1088, title: "Practical life", alt: "A tray with a small glass jug, bowl and sponge for a pouring activity", caption: "Pouring, sweeping and caring for the classroom build concentration, coordination and a quiet pride in doing things for oneself." },
-  { src: languageImg, w: 1024, h: 768, title: "Language & early literacy", alt: "Sandpaper letters beside a wooden moveable alphabet box", caption: "Children trace letters with their fingertips, linking sound and shape long before they pick up a pencil." },
-  { src: numbersImg, w: 1024, h: 768, title: "Number exploration", alt: "Golden bead material and red and blue number rods on a mat", caption: "Hands-on materials make quantity visible, so early maths feels concrete, logical and enjoyable." },
+  { src: practicalImg, w: 1200, h: 1600, title: "Practical life", alt: "A child using a small brush and dustpan to sweep the classroom floor", caption: "Pouring, sweeping and caring for the classroom build concentration, coordination and a quiet pride in doing things for oneself." },
+  { src: languageImg, w: 768, h: 1024, title: "Language & early literacy", alt: "A child arranging moveable alphabet letters beside picture cards on a classroom mat", caption: "Children trace letters with their fingertips, linking sound and shape long before they pick up a pencil." },
+  { src: numbersImg, w: 638, h: 480, title: "Number exploration", alt: "A child matching number cards to red and blue number rods on a classroom mat", caption: "Hands-on materials make quantity visible, so early maths feels concrete, logical and enjoyable." },
   { src: heroImg, w: 1280, h: 1024, title: "A prepared environment", alt: "Ordered shelves of wooden materials in a sunlit classroom", caption: "Everything has a place and sits within reach, inviting children to choose work and return it with care." },
 ];
 
@@ -73,7 +76,7 @@ export const admissionsSteps = [
 const TBC = "The school will confirm this information.";
 export const faqs = [
   { q: "What ages do you accept?", a: "Tulips Montessori primarily welcomes children aged 3 to 6. The school will confirm entry ages and timing." },
-  { q: "What are the school hours, and is aftercare available?", a: `Tulips Montessori offers a half-day programme. Exact hours and aftercare: ${TBC}` },
+  { q: "What are the school hours, and is aftercare available?", a: `School hours are ${school.contact.hours}. Please contact the school for information about aftercare.` },
   { q: "Does my child need to be toilet trained?", a: TBC },
   { q: "What does a typical day look like?", a: `A Montessori morning usually centres on an uninterrupted work period, with time for group gatherings, outdoor play and snack. The school's own daily rhythm: ${TBC}` },
   { q: "How is Islamic learning incorporated?", a: `The school has an Islamic ethos, with values such as kindness, respect and gratitude part of everyday life. Specific Islamic learning content: ${TBC}` },
