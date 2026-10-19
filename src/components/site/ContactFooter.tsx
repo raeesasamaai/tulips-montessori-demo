@@ -16,7 +16,7 @@ export function ContactSection() {
   ];
   return (
     <section id="contact" className="section-pad bg-card">
-      <div className="container-site grid gap-12 lg:grid-cols-2 lg:gap-16">
+      <div className="container-site grid items-start gap-12 lg:grid-cols-2 lg:gap-16">
         <div>
           <p data-reveal className="eyebrow">Contact</p>
           <h2 data-reveal className="mt-3 text-[2rem] md:text-[2.75rem]">Let's talk about your little one's next chapter.</h2>
@@ -31,7 +31,16 @@ export function ContactSection() {
           </dl>
           <div data-reveal className="mt-10 rounded-2xl border border-dashed border-input bg-ivory p-6">
             <p className="flex items-center gap-2 font-medium"><Navigation size={18} aria-hidden className="text-primary" />Directions</p>
-            <p className="mt-2 text-sm text-muted-foreground">A map and directions will be added once the school's exact address is verified.</p>
+            <iframe
+              title="Directions to Tulips Montessori Preschool"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d827.1401846478026!2d18.543110328495022!3d-33.97812809831702!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1dcc45e8fabc46e1%3A0xf0d26b5c18e7868d!2sTulips%20Montessori%20Preschool!5e0!3m2!1sen!2sza!4v1792160160314!5m2!1sen!2sza"
+              width="600"
+              height="450"
+              className="mt-4 aspect-[4/3] h-auto w-full rounded-xl border-0"
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="strict-origin-when-cross-origin"
+            />
           </div>
         </div>
         <EnquiryForm />
@@ -56,9 +65,25 @@ export function Footer() {
           <ul className="mt-4 space-y-2">{nav.map((n) => <li key={n.href}><a href={n.href} className="opacity-90 hover:opacity-100 hover:underline">{n.label}</a></li>)}</ul>
         </nav>
         <div data-reveal>
-          <p className="text-xs uppercase tracking-[0.2em] opacity-70">Visit</p>
-          <p className="mt-4">{school.location}</p>
-          <p className="mt-1 text-sm italic opacity-70">Verified contact details to be added</p>
+          <p className="text-xs uppercase tracking-[0.2em] opacity-70">Contact</p>
+          <dl className="mt-4 space-y-4 text-sm">
+            <div className="flex gap-3">
+              <MapPin size={18} className="mt-1 shrink-0 opacity-80" aria-hidden />
+              <div><dt className="opacity-70">Location</dt><dd className="mt-1">{school.contact.address}</dd></div>
+            </div>
+            <div className="flex gap-3">
+              <Phone size={18} className="mt-1 shrink-0 opacity-80" aria-hidden />
+              <div><dt className="opacity-70">Phone</dt><dd className="mt-1"><a href={`tel:${school.contact.phone}`} className="hover:underline underline-offset-4">{school.contact.phone}</a></dd></div>
+            </div>
+            <div className="flex gap-3">
+              <Mail size={18} className="mt-1 shrink-0 opacity-80" aria-hidden />
+              <div className="min-w-0"><dt className="opacity-70">Email</dt><dd className="mt-1 break-words"><a href={`mailto:${school.contact.email}`} className="hover:underline underline-offset-4">{school.contact.email}</a></dd></div>
+            </div>
+            <div className="flex gap-3">
+              <Clock size={18} className="mt-1 shrink-0 opacity-80" aria-hidden />
+              <div><dt className="opacity-70">School hours</dt><dd className="mt-1">{school.contact.hours}</dd></div>
+            </div>
+          </dl>
           <button type="button" onClick={() => ref.current?.showModal()} className="mt-6 text-sm underline underline-offset-4">Privacy information</button>
         </div>
       </div>

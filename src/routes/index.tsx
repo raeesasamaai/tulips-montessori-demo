@@ -15,6 +15,7 @@ import {
 } from "@/components/site/ContactFooter";
 import { Prospectus } from "@/components/site/Prospectus";
 import { ScrollAnimations } from "@/components/site/ScrollAnimations";
+import { MontessoriQuote } from "@/components/site/MontessoriQuote";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -86,6 +87,7 @@ function Index() {
 
       <main id="main">
         <Hero />
+        <MontessoriQuote />
         <AboutApproach />
         <LearningEnvironment />
         <Educators />

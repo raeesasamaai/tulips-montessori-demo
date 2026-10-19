@@ -28,7 +28,7 @@ export function EnquiryForm() {
 
   if (state === "done") {
     return (
-      <div data-reveal role="status" className="rounded-2xl border border-border bg-card p-8 shadow-soft">
+      <div data-reveal role="status" className="mx-auto w-full max-w-lg self-start rounded-2xl border border-border bg-card p-8 shadow-soft">
         <CheckCircle2 className="text-success" size={32} aria-hidden />
         <p className="mt-4 text-lg">Demo submission complete. No enquiry has been sent. On the live website, the school would receive your message and you would receive an acknowledgement email.</p>
         <button type="button" className="btn-secondary mt-6" onClick={() => setState("idle")}>Send another</button>
@@ -47,19 +47,19 @@ export function EnquiryForm() {
   const a = (id: keyof EnquiryValues) => ({ id, name: id, "aria-invalid": !!errors[id], "aria-describedby": errors[id] ? `${id}-err` : undefined, className: "field" });
 
   return (
-    <form id="enquire" noValidate onSubmit={onSubmit} className="space-y-5 rounded-2xl border border-border bg-card p-6 shadow-soft md:p-8" aria-labelledby="form-h">
+    <form id="enquire" noValidate onSubmit={onSubmit} className="mx-auto w-full max-w-lg self-start space-y-4 rounded-2xl border border-border bg-card p-6 shadow-soft md:p-8" aria-labelledby="form-h">
       <h3 data-reveal id="form-h" className="text-3xl">Send an enquiry</h3>
       <p data-reveal className="text-sm text-muted-foreground">Demo form — nothing you enter is sent or stored.</p>
-      <div ref={summaryRef} tabIndex={-1} role="alert" className="outline-none">
+      <div ref={summaryRef} tabIndex={-1} role="alert" hidden={errList.length === 0 && state !== "error"} className="outline-none">
         {errList.length > 0 && <p className="rounded-lg bg-destructive/10 px-4 py-3 text-sm text-destructive">Please correct {errList.length} {errList.length === 1 ? "field" : "fields"} below.</p>}
         {state === "error" && <p className="rounded-lg bg-destructive/10 px-4 py-3 text-sm text-destructive">Something went wrong. Your details are still here — please try again.</p>}
       </div>
       {Field({ id: "name", label: "Parent/guardian name", req: true, children: <input {...a("name")} autoComplete="name" value={v.name} onChange={set("name")} /> })}
-      <div className="grid gap-5 sm:grid-cols-2">
+      <div className="grid gap-4 sm:grid-cols-2">
         {Field({ id: "email", label: "Email address", req: true, children: <input {...a("email")} type="email" autoComplete="email" value={v.email} onChange={set("email")} /> })}
         {Field({ id: "phone", label: "Phone number", children: <input {...a("phone")} type="tel" autoComplete="tel" value={v.phone} onChange={set("phone")} /> })}
       </div>
-      <div className="grid gap-5 sm:grid-cols-2">
+      <div className="grid gap-4 sm:grid-cols-2">
         {Field({ id: "type", label: "Enquiry type", req: true, children: (
           <select {...a("type")} value={v.type} onChange={set("type")}>
             <option value="">Please choose…</option><option value="general">General enquiry</option><option value="admissions">Admissions</option><option value="visit">School visit</option>
